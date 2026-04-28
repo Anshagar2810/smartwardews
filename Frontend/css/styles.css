@@ -1,0 +1,297 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+.dashboard-card { transition: all 0.3s ease; }
+.dashboard-card:hover { transform: translateY(-2px); }
+
+/* Trae-inspired Light Theme Backgrounds */
+.bg-grid-pattern {
+    background-color: #f9fafb; /* gray-50 */
+    background-image: radial-gradient(#d1d5db 1px, transparent 1px); /* gray-300 dots */
+    background-size: 24px 24px;
+}
+
+/* ECG / Heartbeat Animation */
+.ecg-container {
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ecg-line {
+    fill: none;
+    stroke: #dc2626; /* Red-600 to match Heart */
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 4px rgba(220, 38, 38, 0.4));
+    animation: dash 2s linear infinite;
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 1000;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Pulse Animation for Heart Icon */
+.heart-beat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    15% { transform: scale(1.1); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+    60% { transform: scale(1); }
+}
+
+/* Floating Animation */
+.float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Glow Effect - Adjusted for Light Theme */
+.glow-text {
+    text-shadow: 0 0 30px rgba(37, 99, 235, 0.3); /* Subtle Blue Glow */
+}
+
+/* Scroll Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Ticker Animation */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.ticker {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker 30s linear infinite;
+}
+
+.ticker-item {
+    display: inline-block;
+    padding: 0 2rem;
+}
+
+@keyframes ticker {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Gradient Text Animation */
+.animate-gradient {
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* --- NEW 3D ELEMENTS --- */
+
+/* 3D Scene Container */
+.scene-3d {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+/* 3D Animated DNA Helix */
+.dna-container {
+    position: absolute;
+    top: 50%;
+    right: -10%; /* Position it to the side */
+    transform: translateY(-50%) rotate(-45deg);
+    width: 200px;
+    height: 600px;
+    transform-style: preserve-3d;
+    z-index: 0;
+    pointer-events: none; /* Don't block clicks */
+    opacity: 0.6;
+}
+
+.dna-strand {
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 120px; /* Reduced height per strand for tighter coil */
+    transform-style: preserve-3d;
+    animation: rotateDNA 4s linear infinite;
+}
+
+.dna-dot {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #60a5fa, #2563eb);
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+    top: 0;
+}
+
+.dna-dot:nth-child(1) {
+    left: -40px;
+    background: radial-gradient(circle at 30% 30%, #34d399, #059669); /* Greenish for contrast */
+}
+
+.dna-dot:nth-child(2) {
+    right: -40px;
+    background: radial-gradient(circle at 30% 30%, #60a5fa, #2563eb); /* Blue */
+}
+
+/* Connecting line between dots */
+.dna-line {
+    position: absolute;
+    top: 8px;
+    left: -32px;
+    right: -32px;
+    height: 2px;
+    background: rgba(148, 163, 184, 0.3);
+    transform: translateZ(-1px);
+}
+
+@keyframes rotateDNA {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+/* 3D Floating Medical Cross */
+.floating-cross-container {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    transform-style: preserve-3d;
+    animation: float-3d 6s ease-in-out infinite, spin-3d 15s linear infinite;
+}
+
+.medical-cross {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+/* Background ECG Animation */
+.ecg-pulse-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0; /* Behind content but visible */
+    pointer-events: none;
+}
+
+.ecg-pulse {
+    position: absolute;
+    opacity: 0;
+    animation: pulse-fade 3s ease-out forwards;
+}
+
+.ecg-pulse-path {
+    fill: none;
+    stroke: #38bdf8; /* Sky Blue */
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 350; /* Optimized for path length ~300 */
+    stroke-dashoffset: 350;
+    animation: pulse-draw 3s linear forwards;
+    filter: drop-shadow(0 0 2px rgba(56, 189, 248, 0.5));
+}
+
+@keyframes pulse-draw {
+    0% { stroke-dashoffset: 350; }
+    100% { stroke-dashoffset: 0; }
+}
+
+@keyframes pulse-fade {
+    0% { opacity: 0; }
+    10% { opacity: 0.3; } /* Max opacity is low/translucent */
+    80% { opacity: 0.3; }
+    100% { opacity: 0; }
+}
+
+/* Interactive Hover Effects */
+.interactive-hover:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
+}
+
+.logo-pulse:hover svg {
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+.cross-bar {
+    position: absolute;
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+    border-radius: 12px;
+}
+
+.cross-h {
+    width: 100%;
+    height: 34px;
+    top: 33px;
+    left: 0;
+}
+
+.cross-v {
+    width: 34px;
+    height: 100%;
+    left: 33px;
+    top: 0;
+}
+
+@keyframes float-3d {
+    0%, 100% { transform: translateY(0) rotateX(10deg); }
+    50% { transform: translateY(-30px) rotateX(-10deg); }
+}
+
+@keyframes spin-3d {
+    0% { transform: rotateY(0deg) rotateZ(0deg); }
+    100% { transform: rotateY(360deg) rotateZ(10deg); }
+}
+
+/* 3D Tilt Card Effect */
+.tilt-card {
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+}
+
+.tilt-content {
+    transform: translateZ(20px);
+}
