@@ -2,7 +2,20 @@
 console.log("🔥🔥 SERVER FILE EXECUTED 🔥🔥");
 
 import dotenv from "dotenv";
-dotenv.config();
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Explicitly load .env from the backend directory (works on both localhost & Render)
+dotenv.config({ path: resolve(__dirname, ".env") });
+
+console.log("✅ ENV loaded:", {
+  PORT: process.env.PORT,
+  MONGO_URI: process.env.MONGO_URI ? "SET" : "MISSING ❌",
+  JWT_SECRET: process.env.JWT_SECRET ? "SET" : "MISSING ❌",
+});
 
 import express from "express";
 import cors from "cors";
