@@ -92,7 +92,8 @@ window.DoctorDashboard = ({ user, onLogout, doctors, patients: globalPatients })
             try {
                 const token = localStorage.getItem('app_token');
                 const patId = selectedPatient.patientId;
-                const url = `http://localhost:5001/api/vitals/${patId}`;
+                const API_BASE = window.API_BASE || 'http://localhost:5001/api';
+                const url = `${API_BASE}/vitals/${patId}`;
                 console.log('🔍 Fetching vitals for patientId:', patId, 'URL:', url);
                 const response = await fetch(url, {
                     headers: { 'Authorization': `Bearer ${token}` }

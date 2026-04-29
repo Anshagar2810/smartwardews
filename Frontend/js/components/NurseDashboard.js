@@ -144,8 +144,9 @@ window.NurseDashboard = ({ user, onLogout, patients, doctors }) => {
         
         const fetchVitals = async () => {
             try {
+                const API_BASE = window.API_BASE || 'http://localhost:5001/api';
                 const token = localStorage.getItem('app_token');
-                const response = await fetch(`http://localhost:5001/api/vitals/${selectedPatient.patientId}`, {
+                const response = await fetch(`${API_BASE}/vitals/${selectedPatient.patientId}`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 
