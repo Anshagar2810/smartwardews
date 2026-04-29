@@ -310,19 +310,19 @@ window.DoctorDashboard = ({ user, onLogout, doctors, patients: globalPatients })
                                     <div className="bg-orange-50 rounded-xl p-6 flex flex-col items-center justify-center border border-orange-100 transform transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer" onClick={() => setSelectedMetric('spo2')}>
                                         <div className="text-orange-500 mb-2"><svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg></div>
                                         <div className="text-xs text-gray-500 uppercase font-bold mb-1">SpO₂</div>
-                                        <div className="text-3xl font-bold text-gray-800">{selectedPatient.isOnline ? `${history.spo2.length > 0 ? history.spo2[history.spo2.length - 1] : selectedPatient.vitals.spo2}%` : '-'}</div>
+                                        <div className="text-3xl font-bold text-gray-800">{history.spo2.length > 0 ? history.spo2[history.spo2.length - 1] : selectedPatient.vitals.spo2}%</div>
                                     </div>
                                     {/* Heart Rate */}
                                     <div className="bg-green-50 rounded-xl p-6 flex flex-col items-center justify-center border border-green-100 transform transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer" onClick={() => setSelectedMetric('heartRate')}>
                                         <div className="text-green-500 mb-2"><Activity /></div>
                                         <div className="text-xs text-gray-500 uppercase font-bold mb-1">Heart Rate</div>
-                                        <div className="text-3xl font-bold text-gray-800">{selectedPatient.isOnline ? (history.heartRate.length > 0 ? history.heartRate[history.heartRate.length - 1] : selectedPatient.vitals.heartRate) : '-'} <span className="text-lg text-gray-500 font-normal">bpm</span></div>
+                                        <div className="text-3xl font-bold text-gray-800">{history.heartRate.length > 0 ? history.heartRate[history.heartRate.length - 1] : selectedPatient.vitals.heartRate} <span className="text-lg text-gray-500 font-normal">bpm</span></div>
                                     </div>
                                     {/* Temp */}
                                     <div className="bg-blue-50 rounded-xl p-6 flex flex-col items-center justify-center border border-blue-100 transform transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer" onClick={() => setSelectedMetric('temp')}>
                                         <div className="text-blue-500 mb-2"><Thermometer /></div>
                                         <div className="text-xs text-gray-500 uppercase font-bold mb-1">Temperature</div>
-                                        <div className="text-3xl font-bold text-gray-800">{selectedPatient.isOnline ? `${history.temp.length > 0 ? history.temp[history.temp.length - 1] : selectedPatient.vitals.temp}°F` : '-'}</div>
+                                        <div className="text-3xl font-bold text-gray-800">{history.temp.length > 0 ? history.temp[history.temp.length - 1] : selectedPatient.vitals.temp}°F</div>
                                     </div>
                                     
                                 </div>
