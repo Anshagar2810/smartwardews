@@ -1,12 +1,13 @@
 import axios from "axios";
-import Vitals from "../models/vitals.model.js";
-import Patient from "../models/patient.model.js";
-import Device from "../models/device.model.js";
-import Alert from "../models/alert.model.js";
-
+import mongoose from "mongoose";
 import { checkThresholds } from "../services/threshold.service.js";
 import { calculateRiskScore } from "../services/riskScore.service.js";
 import { sendAlert } from "../services/alert.service.js";
+
+// Check if MongoDB is connected
+const isDbConnected = () => {
+  return mongoose.connection.readyState === 1;
+};
 
 export const fetchFromThingSpeak = async () => {
   try {
@@ -51,6 +52,17 @@ export const fetchFromThingSpeak = async () => {
 
     // Try to get deviceId from environment, fallback to ESP32_001
     const deviceId = process.env.DEVICE_ID || "ESP32_001";
+
+    // Skip if DB not connected
+    if (!isDbConnected()) {
+      console.log("⚠️ MongoDB not connected, skipping vitals processing");
+      return;
+    }
+
+    // Dynamically import models only when DB is connected
+    const Vitals = (await import("../models/vitals.model.js")).default;
+    const Patient = (await import("../models/patient.model.js")).default;
+    const Alert = (await import("../models/alert.model.js")).default;
 
     // Load all patients and select those assigned to this device
     let patients = await Patient.find();

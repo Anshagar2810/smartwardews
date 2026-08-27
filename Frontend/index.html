@@ -35,7 +35,11 @@
 
     <!-- App Scripts -->
     <!-- Load components first so they are available on window object -->
-    <script>window.API_BASE = 'https://smart-ward-backend-n2as.onrender.com/api'</script>
+    <script>
+      window.API_BASE = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'http://localhost:5001/api'
+        : (window.ENV_API_BASE || 'https://smartward-ews-backend.onrender.com/api');
+    </script>
     <script type="text/babel" src="js/components/Icons.js"></script>
     <script type="text/babel" src="js/components/LandingPage.js"></script>
     <script type="text/babel" src="js/components/AuthPage.js"></script>

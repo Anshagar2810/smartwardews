@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "public": true,
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://smartward-ews.onrender.com/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/Frontend/$1"
+    }
+  ]
+}

@@ -133,28 +133,34 @@ window.AuthPage = ({ onLogin, doctors, pendingDoctors = [], onBack, setPendingDo
         e.preventDefault();
         
         if (userType === 'admin') {
-            if (isLogin) {
-                // Admin Login via backend
-                const API_BASE = window.API_BASE || 'http://localhost:5001/api';
-                fetch(`${API_BASE}/auth/login`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ identifier: formData.email.trim(), password: formData.password })
-                })
-                .then(res => res.json().then(body => ({ ok: res.ok, body })))
-                .then(({ ok, body }) => {
-                    if (!ok) {
-                        alert(body.error || body.message || 'Login failed');
-                        return;
-                    }
-                    const { token, user } = body;
-                    onLogin(user, 'admin', token);
-                })
-                .catch(err => {
-                    console.error('Login error', err);
-                    alert('Unable to reach authentication server.');
-                });
-            } else {
+                            if (isLogin) {
+                                // Admin Login via backend
+                                const API_BASE = window.API_BASE || 'http://localhost:5001/api';
+                                console.log('🔐 Attempting login to:', API_BASE);
+                                fetch(`${API_BASE}/auth/login`, {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ identifier: formData.email.trim(), password: formData.password })
+                                })
+                                .then(res => {
+                                    console.log('📡 Response received:', res);
+                                    return res.json().then(body => ({ ok: res.ok, body }))
+                                })
+                                .then(({ ok, body }) => {
+                                    console.log('📦 Response body:', body);
+                                    if (!ok) {
+                                        alert(body.error || body.message || 'Login failed');
+                                        return;
+                                    }
+                                    const { token, user } = body;
+                                    onLogin(user, 'admin', token);
+                                })
+                                .catch(err => {
+                                    console.error('❌ Login error details:', err);
+                                    console.error('❌ Login error stack:', err.stack);
+                                    alert(`Unable to reach authentication server. Error: ${err.message}`);
+                                });
+                            } else {
                 // Admin Signup via backend
                 if (formData.password !== formData.confirmPassword) {
                     alert('Passwords do not match!'); return;
